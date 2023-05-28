@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container1{
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+}
+
+.navigator{
+    height: 8vh;
+    width: 100%;
+}
+
+.body{
+    height: 92vh;
+    width: 100%;
+}

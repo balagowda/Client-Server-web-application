@@ -1,45 +1,23 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+require('./models/db');
+const express = require('express');
+const { default: mongoose } = require('mongoose');
+const cors = require('cors');
+const studentModel = require('./models/student.model');
 
-mongoose
-  .connect("mongodb://localhost:27017/student")
-  .then(() => {
-    console.log("Connection success");
-  })
-  .catch(() => {
-    console.log("connection failed");
-  });
+var app = express();
+app.use(cors());
+app.use(express.json());
+//app.use(bodyparser.urlencoded({extended:true}));
 
-  const newSchema = mongoose.Schema({
-    Name:{
-      type:String,
-      reuired:true
-    },
-    Mob:{
-      type:NumberInt(10),
-      length:10,
-      required:true
-    }
-  })
-
-  const collection = new mongoose.model("studentCollection",newSchema);
-  module.exports = collection;
-
-const app = express();
-
-app.use(express.urlencoded({extended:true}));
-
-app.get("/", cors(),(req, res) => {
-  
+var a = app.listen(8000,()=>{
+  //console.log("Now started",a.address().port);
 });
 
-app.post('/',async(req,res)=>{
-    const {data} = req.body
+app.get("/message", async (req, res) => {
+  var msg = await studentModel.find();
+  res.json(msg);
+});
 
-    await collection.insertMany([data]);
+app.get('/',(req,res)=>{
+  res.send("hello");
 })
-
-app.listen(3000, () => {
-  console.log("server started");
-});
