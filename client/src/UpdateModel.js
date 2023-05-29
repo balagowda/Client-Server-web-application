@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useRef } from "react";
 
-const UpdateModel = ({item, baseUrl}) => {
-
+const UpdateModel = ({ item, baseUrl }) => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const contactRef = useRef(null);
@@ -26,6 +25,8 @@ const UpdateModel = ({item, baseUrl}) => {
       .catch((error) => {
         console.log(error);
       });
+
+    window.location.reload(true);
   };
 
   return (
