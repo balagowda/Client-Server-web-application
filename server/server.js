@@ -20,13 +20,23 @@ app.get("/message", async (req, res) => {
 });
 
 app.post("/add", (req, res) => {
-  var Name = req.body.name;
-  var clas = req.body.class;
-  var email = req.body.email;
-  var contact = req.body.contact;
-
   studentModel
     .create(req.body)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+    });
+});
+
+app.put("/update/:id", (req, res) => {
+
+  studentModel.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: req.body,
+    })
     .then((data) => {
       res.json(data);
     })
