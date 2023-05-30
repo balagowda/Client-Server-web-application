@@ -31,10 +31,8 @@ app.post("/add", (req, res) => {
 });
 
 app.put("/update/:id", (req, res) => {
-
-  studentModel.findByIdAndUpdate(
-    req.params.id,
-    {
+  studentModel
+    .findByIdAndUpdate(req.params.id, {
       $set: req.body,
     })
     .then((data) => {
@@ -42,6 +40,18 @@ app.put("/update/:id", (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({ error: error.message });
+    });
+});
+
+app.delete("/delete/:id", (req, res) => {
+  console.log(req.params.id);
+  studentModel
+    .findByIdAndRemove(req.params.id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      res.status(404).json({ error: error.message });
     });
 });
 

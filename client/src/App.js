@@ -5,6 +5,8 @@ import "./App.css";
 import axios from "axios";
 import UpdateModel from "./UpdateModel";
 import AddStudent from "./AddStudent";
+import Navigator from "./Navigator";
+import DeleteModel from "./DeleteModel";
 
 const App = () => {
   const [message, setMessage] = useState([]);
@@ -24,13 +26,7 @@ const App = () => {
 
   return (
     <div className="container1">
-      <div className="navigator">
-        <nav className="navbar navbar-dark bg-dark">
-          <div className="container-fluid">
-            <span className="navbar-brand mb-0 h1">Navbar</span>
-          </div>
-        </nav>
-      </div>
+      <Navigator />
 
       {/* /*------------dynamic data using map function------------------*/}
       <div className="body">
@@ -52,7 +48,14 @@ const App = () => {
                         {item.class}
                       </p>
 
-                      <UpdateModel item={item} baseUrl={baseUrl} />
+                      <div className="row justify-content-around">
+                        <div className="col-4">
+                          <UpdateModel item={item} baseUrl={baseUrl} />
+                        </div>
+                        <div className="col-4">
+                          <DeleteModel item={item} baseUrl={baseUrl}/>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
